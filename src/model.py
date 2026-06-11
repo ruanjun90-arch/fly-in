@@ -7,7 +7,7 @@
 #   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/06/08 11:42:21 by junruan             #+#    #+#            #
-#   Updated: 2026/06/09 08:30:28 by junruan            ###   ########.fr      #
+#   Updated: 2026/06/11 11:20:53 by junruan            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -49,8 +49,9 @@ class Connection:
 @dataclass
 class Map:
     """A network of zones connected by bidirectional links."""
+    start: str | None = None
+    end: str | None = None
+    nb_drones: int | None = None
     zones: dict[str, Zone] = field(default_factory=dict)
     adjacency: dict[str, list[str]] = field(default_factory=dict)
     connections: dict[frozenset[str], Connection] = field(default_factory=dict)
-    start: str | None = None
-    end: str | None = None
