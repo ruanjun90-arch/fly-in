@@ -1,0 +1,2 @@
+[flake8]
+exclude = maps, .venv, venv, env, .env, __pycache__, .git, build, dist, .mypy_cache
