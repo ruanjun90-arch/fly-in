@@ -1,3 +1,16 @@
+#!/usr/bin/env python3
+# ########################################################################### #
+#   shebang: 1                                                                #
+#                                                          :::      ::::::::  #
+#   parser.py                                            :+:      :+:    :+:  #
+#                                                      +:+ +:+         +:+    #
+#   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
+#                                                  +#+#+#+#+#+   +#+          #
+#   Created: 2026/06/14 19:48:39 by junruan             #+#    #+#            #
+#   Updated: 2026/06/14 19:48:40 by junruan            ###   ########.fr      #
+#                                                                             #
+# ########################################################################### #
+
 from src.error import ParsingError
 from src.model import Map, Zone, Connection, ZoneType
 
