@@ -16,11 +16,7 @@ from src.model import Map, Zone, Connection, ZoneType
 
 
 class Parser:
-    """Parse a Fly-in map file into a graph.
-
-    The parser reads a map definition file, validates its structure, and
-    fills a ``Map`` instance with zones, connections, and the drone count.
-    """
+    """Parse Fly-in map files into ``Map`` objects."""
 
     def __init__(self) -> None:
         """Initialize an empty parser state."""

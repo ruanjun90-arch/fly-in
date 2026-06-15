@@ -7,7 +7,7 @@
 #   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/06/14 19:48:55 by junruan             #+#    #+#            #
-#   Updated: 2026/06/15 19:06:03 by junruan            ###   ########.fr      #
+#   Updated: 2026/06/15 22:30:29 by junruan            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -20,6 +20,14 @@ from src.pathfinding import PathFinder
 
 class Scheduler:
     def __init__(self, the_map: Map) -> None:
+        """Initialize the scheduler with a parsed map.
+
+        Args:
+            the_map: Parsed map containing zones, connections, and drone count.
+
+        Raises:
+            ParsingError: If the map is missing required scheduling data.
+        """
         self.the_map = the_map
         self.pathfinder = PathFinder(the_map)
         if self.the_map.nb_drones is None:
@@ -37,6 +45,12 @@ class Scheduler:
             self.drone_step[drone] = 0
 
     def simulator(self) -> list[list[str]]:
+        """Simulate drone movement turn by turn.
+
+        Returns:
+            A list of turns, where each turn contains the movement commands
+            executed during that turn.
+        """
         turn = []
         in_transit: dict[int, str] = {}
         while not all(

@@ -49,6 +49,7 @@ Key design decisions:
 - BFS / graph traversal
 - Python docs (dataclasses, enum, typing)
 - https://docs.python.org/zh-cn/3.14/library/heapq.html
+- https://dev.to/whoakarsh/finding-the-k-shortest-paths-using-yens-algorithm-in-python-1gka
 
 ### Use of AI
 
