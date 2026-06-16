@@ -31,18 +31,20 @@ class Output:
             plt.scatter(
                 self.the_map.zones[zone].x,
                 self.the_map.zones[zone].y,
-                color=self.the_map.zones[zone].color
+                color=self.the_map.zones[zone].color,
+                s=100
             )
             plt.annotate(
                 zone,
                 (self.the_map.zones[zone].x, self.the_map.zones[zone].y),
                 textcoords="offset points",
-                xytext=(-10, 10)
+                xytext=(-10, 10),
+                fontsize=8
             )
         for _, conn in self.the_map.connections.items():
             x1 = self.the_map.zones[conn.zone_a].x
             y1 = self.the_map.zones[conn.zone_a].y
             x2 = self.the_map.zones[conn.zone_b].x
             y2 = self.the_map.zones[conn.zone_b].y
-            plt.plot([x1, x2], [y1, y2])
+            plt.plot([x1, x2], [y1, y2], color="grey")
         plt.show()
