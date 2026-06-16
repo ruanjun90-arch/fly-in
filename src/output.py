@@ -7,9 +7,11 @@
 #   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/06/15 22:07:22 by junruan             #+#    #+#            #
-#   Updated: 2026/06/15 22:53:16 by junruan            ###   ########.fr      #
+#   Updated: 2026/06/16 14:14:48 by junruan            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
+
+import matplotlib.pyplot as plt
 
 from src.model import Map
 
@@ -25,4 +27,22 @@ class Output:
             print(move)
 
     def visualization(self) -> None:
-        pass
+        for zone in self.the_map.zones:
+            plt.scatter(
+                self.the_map.zones[zone].x,
+                self.the_map.zones[zone].y,
+                color=self.the_map.zones[zone].color
+            )
+            plt.annotate(
+                zone,
+                (self.the_map.zones[zone].x, self.the_map.zones[zone].y),
+                textcoords="offset points",
+                xytext=(-10, 10)
+            )
+        for _, conn in self.the_map.connections.items():
+            x1 = self.the_map.zones[conn.zone_a].x
+            y1 = self.the_map.zones[conn.zone_a].y
+            x2 = self.the_map.zones[conn.zone_b].x
+            y2 = self.the_map.zones[conn.zone_b].y
+            plt.plot([x1, x2], [y1, y2])
+        plt.show()
