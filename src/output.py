@@ -36,7 +36,7 @@ class Output:
         for drone in range(1, (self.the_map.nb_drones + 1)):
             start_x = self.the_map.zones[self.the_map.start].x
             start_y = self.the_map.zones[self.the_map.start].y
-            drone_position[f"D{drone}"] = (start_x, start_y)
+            drone_position[f"D{drone}"] = (float(start_x), float(start_y))
         for turn in self.simulator:
             plt.clf()
             self._init_map()
@@ -49,12 +49,12 @@ class Output:
                 if len(parts) == 3:
                     x2 = self.the_map.zones[parts[2]].x
                     y2 = self.the_map.zones[parts[2]].y
-                    drone_position[drone_id] = (int((x1+x2)/2), int((y1+y2)/2))
+                    drone_position[drone_id] = (((x1+x2)/2), ((y1+y2)/2))
                 if len(parts) == 2:
                     drone_position[drone_id] = (x1, y1)
 
             for drone_id, pos in drone_position.items():
-                plt.scatter(pos[0], pos[1], color="red", s=200, marker="*")
+                plt.scatter(pos[0], pos[1], color="grey", s=200, marker="*")
                 plt.annotate(
                     drone_id,
                     (pos[0], pos[1]),
@@ -62,7 +62,7 @@ class Output:
                     xytext=(-10, 20),
                     fontsize=8
                 )
-            plt.pause(1)
+            plt.pause(2)
         plt.show()
 
     def _init_map(self) -> None:

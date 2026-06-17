@@ -64,8 +64,10 @@ class Scheduler:
 
             for drone_id in list(in_transit.keys()):
                 destination = in_transit[drone_id]
+                zone_a = self.drone_position[drone_id]
                 self.drone_position[drone_id] = destination
                 drone_in_zone[destination] += 1
+                drone_in_zone[zone_a] -= 1
                 turn_moves.append(f"D{drone_id}-{destination}")
                 del in_transit[drone_id]
                 landed.add(drone_id)
