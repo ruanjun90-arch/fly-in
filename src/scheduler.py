@@ -7,7 +7,7 @@
 #   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/06/14 19:48:55 by junruan             #+#    #+#            #
-#   Updated: 2026/06/17 08:09:37 by junruan            ###   ########.fr      #
+#   Updated: 2026/06/17 23:07:17 by junruan            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -38,10 +38,13 @@ class Scheduler:
         self.drone_paths: dict[int, list[str]] = {}
         self.drone_step: dict[int, int] = {}
 
-        path = self.pathfinder.dijkstra()
+        paths = self.pathfinder.find_k_paths()
         for drone in range(1, (self.the_map.nb_drones + 1)):
             self.drone_position[drone] = self.the_map.start
-            self.drone_paths[drone] = path
+            if len(paths) >= 2 and drone % 4 == 0:
+                self.drone_paths[drone] = paths[1]
+            else:
+                self.drone_paths[drone] = paths[0]
             self.drone_step[drone] = 0
 
     def simulator(self) -> list[list[str]]:

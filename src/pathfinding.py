@@ -7,7 +7,7 @@
 #   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/06/14 19:48:47 by junruan             #+#    #+#            #
-#   Updated: 2026/06/14 19:48:48 by junruan            ###   ########.fr      #
+#   Updated: 2026/06/17 23:20:37 by junruan            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -60,12 +60,13 @@ class PathFinder:
             current = came_from[current]
         return path[::-1]
 
-    def dijkstra(self) -> list[str]:
+    def dijkstra(self, blocked: set[frozenset[str]]) -> list[str]:
         """Return the lowest-cost path using zone entry costs.
 
         Returns:
             A path from start to end as a list of zone names.
         """
+        self.blocked = blocked
         if self.the_map.start is None or self.the_map.end is None:
             raise ValueError("map has no start or end")
         heap: list[tuple[int, str]] = [(0, self.the_map.start)]
@@ -82,9 +83,11 @@ class PathFinder:
                 break
             else:
                 for neighbor in self.the_map.adjacency[zone_current]:
+                    if frozenset({zone_current, neighbor}) in self.blocked:
+                        continue
                     if self.the_map.zones[neighbor].zone_type == ZoneType.BLOCKED:  # noqa: E501
                         continue
-                    if self.the_map.zones[neighbor].zone_type == ZoneType.NORMAL:  # noqa: E501
+                    elif self.the_map.zones[neighbor].zone_type == ZoneType.NORMAL:  # noqa: E501
                         step_cost = 1
                     elif self.the_map.zones[neighbor].zone_type == ZoneType.RESTRICTED:  # noqa: E501
                         step_cost = 2
@@ -103,6 +106,27 @@ class PathFinder:
             path.append(current)
             current = came_from[current]
         return path[::-1]
+
+    def find_k_paths(self) -> list[list[str]]:
+        all_paths: list[list[str]] = []
+        first_path = self.dijkstra(set())
+        all_paths.append(first_path)
+        for i in range(len(first_path) - 1):
+            blocked = {frozenset({first_path[i], first_path[i + 1]})}
+            try:
+                new_path = self.dijkstra(blocked)
+                if new_path not in all_paths:
+                    all_paths.append(new_path)
+            except ValueError:
+                continue
+        all_paths.sort(key=lambda p: self.compute_path_cost(p))
+        min_cost = self.compute_path_cost(all_paths[0])
+        max_cost = min_cost * 1.3
+        all_paths = [
+            p for p in all_paths
+            if self.compute_path_cost(p) <= max_cost
+        ]
+        return all_paths
 
     def compute_path_cost(self, path: list[str]) -> int:
         """Compute the total traversal cost of a path.
