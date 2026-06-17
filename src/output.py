@@ -7,11 +7,11 @@
 #   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/06/15 22:07:22 by junruan             #+#    #+#            #
-#   Updated: 2026/06/16 22:52:31 by junruan            ###   ########.fr      #
+#   Updated: 2026/06/16 23:05:49 by junruan            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
-import matplotlib.pyplot as plt  # type: ignore
+import matplotlib.pyplot as plt
 
 from src.model import Map
 from src.error import ParsingError
@@ -49,9 +49,9 @@ class Output:
                 if len(parts) == 3:
                     x2 = self.the_map.zones[parts[2]].x
                     y2 = self.the_map.zones[parts[2]].y
-                    drone_position[drone_id] = [(x1+x2)/2, (y1+y2)/2]
+                    drone_position[drone_id] = (int((x1+x2)/2), int((y1+y2)/2))
                 if len(parts) == 2:
-                    drone_position[drone_id] = [x1, y1]
+                    drone_position[drone_id] = (x1, y1)
 
             for drone_id, pos in drone_position.items():
                 plt.scatter(pos[0], pos[1], color="red", s=200, marker="*")

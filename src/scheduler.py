@@ -7,7 +7,7 @@
 #   By: junruan <junruan@student.42.fr>              +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/06/14 19:48:55 by junruan             #+#    #+#            #
-#   Updated: 2026/06/16 20:26:19 by junruan            ###   ########.fr      #
+#   Updated: 2026/06/17 08:09:37 by junruan            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -84,8 +84,8 @@ class Scheduler:
                 conn_key = frozenset({position, next_zone})
                 connection = self.the_map.connections[conn_key]
                 conn_limit = connection.max_link_capacity
-                if (next_zone == self.the_map.end
-                        or drone_in_zone[next_zone] < zone_limitation
+                if ((next_zone == self.the_map.end
+                        or drone_in_zone[next_zone] < zone_limitation)
                         and link_usage.get(conn_key, 0) < conn_limit):
                     link_usage[conn_key] = link_usage.get(conn_key, 0) + 1
                     zone_type = self.the_map.zones[next_zone].zone_type
