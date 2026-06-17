@@ -1,6 +1,6 @@
 MAP ?= maps/easy/01_linear_path.txt
 
-.PHONY: install run visual menu debug clean lint test-maps test-challenger
+.PHONY: install run visual menu debug clean lint lint-strict test-maps test-challenger
 
 install:
 	uv sync
@@ -24,6 +24,10 @@ clean:
 lint:
 	uv run flake8 .
 	uv run mypy . --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs
+
+lint-strict:
+	uv run flake8 .
+	uv run mypy . --strict --ignore-missing-imports
 
 test-maps:
 	uv run python -m src maps/easy/01_linear_path.txt
