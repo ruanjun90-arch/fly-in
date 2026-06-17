@@ -11,6 +11,8 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Command-line entry point for running the Fly-in simulation."""
+
 import sys
 
 from src.error import ParsingError

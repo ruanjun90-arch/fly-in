@@ -11,5 +11,7 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Custom exceptions raised by the Fly-in parser and runtime."""
+
 class ParsingError(Exception):
     """Raised when the input map file has invalid syntax."""

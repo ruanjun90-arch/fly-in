@@ -11,6 +11,8 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Parse Fly-in map files into in-memory model objects."""
+
 from src.error import ParsingError
 from src.model import Map, Zone, Connection, ZoneType
 

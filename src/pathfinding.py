@@ -11,6 +11,8 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Compute viable paths through the drone network."""
+
 from collections import deque
 import heapq
 
@@ -108,6 +110,11 @@ class PathFinder:
         return path[::-1]
 
     def find_k_paths(self) -> list[list[str]]:
+        """Return a small set of low-cost alternative paths.
+
+        The first path is the best Dijkstra path. Additional paths are found
+        by temporarily blocking one edge from that first path and recomputing.
+        """
         all_paths: list[list[str]] = []
         first_path = self.dijkstra(set())
         all_paths.append(first_path)

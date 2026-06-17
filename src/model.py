@@ -11,6 +11,8 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Define the core data structures used by the Fly-in project."""
+
 from dataclasses import dataclass, field
 from enum import Enum
 

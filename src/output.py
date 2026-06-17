@@ -11,6 +11,8 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Render simulation output as text or a matplotlib animation."""
+
 import matplotlib.pyplot as plt
 
 from src.model import Map
@@ -18,16 +20,21 @@ from src.error import ParsingError
 
 
 class Output:
+    """Format and display the scheduler results."""
+
     def __init__(self, the_map: Map, simulator: list[list[str]]) -> None:
+        """Store the parsed map and the per-turn movement list."""
         self.the_map = the_map
         self.simulator = simulator
 
     def write_down(self) -> None:
+        """Print each simulation turn using the expected textual format."""
         for turn in self.simulator:
             move = " ".join(turn)
             print(move)
 
     def visualization(self) -> None:
+        """Animate drone positions turn by turn with matplotlib."""
         drone_position = {}
         if not self.the_map.nb_drones:
             raise ParsingError("missing 'nb_drones'")
@@ -66,6 +73,7 @@ class Output:
         plt.show()
 
     def _init_map(self) -> None:
+        """Draw the static map nodes and links for one animation frame."""
         for zone in self.the_map.zones:
             if not self.the_map.zones[zone].color:
                 self.the_map.zones[zone].color = "black"

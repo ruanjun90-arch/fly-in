@@ -11,6 +11,8 @@
 #                                                                             #
 # ########################################################################### #
 
+"""Schedule drone movements across the map turn by turn."""
+
 from collections import Counter
 
 from src.model import Map, ZoneType
@@ -19,6 +21,8 @@ from src.pathfinding import PathFinder
 
 
 class Scheduler:
+    """Assign routes to drones and simulate their movements."""
+
     def __init__(self, the_map: Map) -> None:
         """Initialize the scheduler with a parsed map.
 
