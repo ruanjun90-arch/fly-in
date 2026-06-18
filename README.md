@@ -43,7 +43,7 @@ make install
 make run
 ```
 
-The program will prompt you to select a map file from the available options.
+The program will ask you to select a map file from the available options.
 
 ### Debugging
 

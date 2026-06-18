@@ -6,7 +6,7 @@ install:
 	uv sync
 
 run:
-	uv run python -m src $(MAP)
+	uv run python -m src --visual --menu
 
 visual:
 	uv run python -m src --visual $(MAP)
